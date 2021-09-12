@@ -1,3 +1,6 @@
+import { ToastComponent } from './../shared-components/toast/toast.component';
+import { ConfirmationDialogComponent } from './../shared-components/confirmation-dialog/confirmation-dialog.component';
+import { SpinnerComponent } from './../shared-components/spinner/spinner.component';
 import { AuthorEffect } from './state/author.effects';
 import { ButtonComponent } from './../shared-components/button/button.component';
 import { BookAuthorComponent } from './book-author/book-author.component';
@@ -15,6 +18,7 @@ import { bookReducer } from './state/book.reducer';
 import { BookEffect } from './state/book.effects';
 import { BookAddComponent } from './book-add/book-add.component';
 import { authorReducer } from './state/author.reducer';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 const bookRoutes: Routes = [
   { path: '', component: BookComponent },
@@ -41,6 +45,9 @@ const bookRoutes: Routes = [
     BookDetailsComponent,
     BookAuthorComponent,
     BookAddComponent,
+    SpinnerComponent,
+    ConfirmationDialogComponent,
+    ToastComponent
   ],
   exports: [
     BookComponent,
@@ -50,6 +57,7 @@ const bookRoutes: Routes = [
     BookAuthorComponent,
     BookAddComponent,
   ],
+  providers: [ConfirmationService, MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BooksModule {}

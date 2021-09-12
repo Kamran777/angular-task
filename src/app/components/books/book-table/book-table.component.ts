@@ -1,49 +1,70 @@
 import { Book } from './../../../models/book.model';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ApiService } from 'src/app/services/api.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import * as fromBook from '../state/book.reducer';
+import * as bookActions from '../state/book.actions';
+import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-book-table',
   templateUrl: './book-table.component.html',
-  styleUrls: ['./book-table.component.scss']
+  styleUrls: ['./book-table.component.scss'],
 })
-export class BookTableComponent implements OnInit, OnDestroy {
-  public subscription: Subscription;
-  public disableRouterLink: boolean = true;
-  @Input() public books: Book[];
+export class BookTableComponent implements OnInit {
+  public error$: Observable<String>;
+  @Input() public books$: Observable<Book[]>;
   @Input() public showLoader: boolean = false;
-  @Input() public title: string = 'BOOK TABLE';
+  @Input() public disableRouterLink: boolean = true;
+  @Input() public title: string = '';
   @Input() public hideActions: boolean = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private store: Store<fromBook.AppState>,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   public ngOnInit(): void {
     this.showLoader = true;
-    if (!this.books) {
-      this.disableRouterLink = false;
+    if(!this.books$){
       this.getAllBooks();
     }
+    this.error$ = this.store.pipe(select(fromBook.getError));
   }
 
   public getAllBooks(): void {
-    this.subscription = this.apiService
-      .getAll<Book[]>(`books`)
-      .subscribe((books: any) => {
-        setTimeout(() => {
-          this.showLoader = false;
-          this.books = books;
-        }, 1000);
-      });
+    this.store.dispatch(new bookActions.LoadBooks());
+    setTimeout(() => {
+      this.showLoader = false;
+      this.books$ = this.store.pipe(select(fromBook.getBooks));
+    }, 1000);
+    this.error$ = this.store.pipe(select(fromBook.getError));
   }
 
   public disableRouter(): boolean {
     return this.disableRouterLink ? true : false;
   }
 
-  public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription?.unsubscribe();
-    }
+  public deleteBook(book: Book): void {
+    this.confirmationService.confirm({
+      message: 'Are You Sure You want to Delete the Book?',
+      accept: () => {
+        this.store.dispatch(new bookActions.DeleteBook(book.id as any));
+        this.confirmationService.close();
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'You successfully deleted a book!'});
+      },
+      reject: () => {
+        this.confirmationService.close();
+        this.messageService.add({severity:'info', summary: 'Info', detail: 'You declined delete a book!'});
+      }
+    });
+  }
+
+  public editBook(book: Book): void {
+    this.router.navigateByUrl('edit');
+    this.store.dispatch(new bookActions.LoadBook(book.id as any));
   }
 }

@@ -41,54 +41,34 @@
       ]
     },
     {
-      "id": 5,
       "title": "Title 5",
       "author": [
         {
-          "id": 5,
-          "name": "P. Krzysztof"
+          "id": 1,
+          "name": "S. Kamran"
         }
-      ]
+      ],
+      "id": 5
     },
     {
-      "id": 6,
       "title": "Title 6",
       "author": [
         {
-          "id": 6,
-          "name": "V. Nazrin"
+          "id": 3,
+          "name": "S. John"
         }
-      ]
+      ],
+      "id": 6
     },
     {
-      "id": 7,
       "title": "Title 7",
-      "author": [
-        {
-          "id": 1,
-          "name": "S. Kamran"
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "title": "Title 8",
-      "author": [
-        {
-          "id": 1,
-          "name": "S. Kamran"
-        }
-      ]
-    },
-    {
-      "title": "Title 9",
       "author": [
         {
           "id": 4,
           "name": "L. Katarzyna"
         }
       ],
-      "id": 9
+      "id": 7
     }
   ],
   "authors": [
