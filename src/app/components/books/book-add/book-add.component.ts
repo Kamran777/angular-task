@@ -2,13 +2,7 @@ import { BookService } from './../../../services/book.service';
 import { Book } from './../../../models/book.model';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ApiService } from 'src/app/services/api.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import * as fromBook from '../state/book.reducer';
@@ -23,31 +17,24 @@ import { Author } from './../../../models/author.model';
 export class BookAddComponent implements OnInit {
   public authors: string[];
   public selectedAuthor: string = '';
-  public subscription: Subscription;
+  public subscriptions: Subscription[] = [];
   public bookForm: FormGroup;
   public id?: number;
 
   constructor(
-    private apiService: ApiService,
     private bookService: BookService,
-    private fb: FormBuilder,
     private store: Store<fromBook.AppState>,
     private router: Router
   ) {}
 
   public ngOnInit(): void {
-    this.apiService.getAll<Book[]>(`books`).subscribe((data: any) => {
-      const newAuthorsArr: any[] = [];
-      data.map((authors: any) => {
-        authors.author.map((author: any) => {
-          newAuthorsArr.push(author.name);
-        });
-      });
-      this.authors = [...new Set(newAuthorsArr)];
-    });
+    this.getAllAuthors();
 
     this.bookForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.minLength(7)]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(7),
+      ]),
       author: new FormControl('', [Validators.required]),
     });
   }
@@ -72,13 +59,15 @@ export class BookAddComponent implements OnInit {
   }
 
   public getId(author: string): void {
-    this.bookService.getAuthors().subscribe((authors: Author[]) => {
-      authors.forEach((authorValue: any) => {
-        if (authorValue.name === author) {
-          this.id = authorValue.id;
-        }
-      });
-    });
+    this.subscriptions.push(
+      this.bookService.getAuthors().subscribe((authors: Author[]) => {
+        authors.forEach((authorValue: any) => {
+          if (authorValue.name === author) {
+            this.id = authorValue.id;
+          }
+        });
+      })
+    );
   }
 
   private get title(): any {
@@ -89,17 +78,16 @@ export class BookAddComponent implements OnInit {
     return this.bookForm.get('author') as FormControl;
   }
 
-  public getAuthors(): void {
-    this.apiService.getAll<Book[]>(`books`)
-    .subscribe((data: any) => {
-      const newAuthorsArr: any[] = [];
-      data.map((authors: any) => {
-        authors.author.map((author: any) => {
+  public getAllAuthors(): void {
+    this.subscriptions.push(
+      this.bookService.getAuthors().subscribe((data: any) => {
+        const newAuthorsArr: any[] = [];
+        data.map((author: Author) => {
           newAuthorsArr.push(author.name);
         });
-      });
-      this.authors = [...new Set(newAuthorsArr)];
-    });
+        this.authors = [...new Set(newAuthorsArr)];
+      })
+    );
   }
 
   public getSelectedAuthor(event: any): void {
@@ -108,8 +96,8 @@ export class BookAddComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.subscriptions) {
+      this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     }
   }
 }
