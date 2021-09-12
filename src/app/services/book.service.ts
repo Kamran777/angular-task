@@ -19,6 +19,10 @@ export class BookService {
     return this.http.get<Book[]>(this.booksUrl);
   }
 
+  getBooksByAuthor(payload: number): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.booksUrl}/${payload}`);
+  }
+
   getBookById(payload: number): Observable<Book> {
     return this.http.get<Book>(`${this.booksUrl}/${payload}`);
   }

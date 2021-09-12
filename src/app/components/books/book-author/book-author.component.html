@@ -1,2 +1,3 @@
-<app-button [labelName]="'Back'" [routerLinkPath]="'/books'"></app-button>
-<app-book-table [books]="books" [showLoader]="showLoader" [title]="title" [hideActions]="true"></app-book-table>
+<app-button *ngIf="!showLoader" [labelName]="'Back'" [routerLinkPath]="'/books'"></app-button>
+<app-book-table *ngIf="(books$ | async) as booksData" [books$]="books$" [showLoader]="showLoader" [title]="title"
+    [hideActions]="true" [disableRouterLink]="true"></app-book-table>

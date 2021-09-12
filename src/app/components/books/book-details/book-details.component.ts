@@ -1,3 +1,4 @@
+import { BookService } from './../../../services/book.service';
 import { Book } from './../../../models/book.model';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -13,10 +14,11 @@ export class BookDetailsComponent implements OnInit {
   public id: number;
   public book: Book;
   public subscription: Subscription;
+  public isShow: boolean = false;
 
   constructor(
-    private apiService: ApiService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private bookService: BookService
   ) {}
 
   public ngOnInit(): void {
@@ -26,15 +28,20 @@ export class BookDetailsComponent implements OnInit {
   public getDataById(): void {
     this.subscription = this._activatedRoute.params.subscribe((params) => {
       const id = params['id'];
-      this.subscription = this.apiService
-        .get<Book>(id, `books`)
+      this.subscription = this.bookService
+        .getBookById(id)
         .subscribe((book: Book) => {
-          this.book = book;
+          setTimeout(() => {
+            this.isShow = true;
+            this.book = book;
+          }, 1000)
         });
     });
   }
 
   public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 }

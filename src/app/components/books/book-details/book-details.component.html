@@ -1,10 +1,13 @@
-<app-button [labelName]="'Back'" [routerLinkPath]="'/books'"></app-button>
-<p>
-  ID: {{book?.id}}
-</p>
-<p>
-  TITLE: {{book?.title}}
-</p>
-<p *ngFor="let author of book?.author">
-  AUTHOR: {{author?.name}}
-</p>
+<app-spinner *ngIf="!isShow"></app-spinner>
+<app-button *ngIf="isShow" [labelName]="'Back'" [routerLinkPath]="'/books'"></app-button>
+<div *ngIf="isShow">
+  <p>
+    ID: {{book?.id}}
+  </p>
+  <p>
+    TITLE: {{book?.title}}
+  </p>
+  <p *ngFor="let author of book?.author">
+    AUTHOR: {{author?.name}}
+  </p>
+</div>

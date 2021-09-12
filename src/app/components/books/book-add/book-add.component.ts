@@ -1,4 +1,3 @@
-import { BookService } from './../../../services/book.service';
 import { Book } from './../../../models/book.model';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -8,6 +7,8 @@ import { Router } from '@angular/router';
 import * as fromBook from '../state/book.reducer';
 import * as bookActions from '../state/book.actions';
 import { Author } from './../../../models/author.model';
+import { BookService } from 'src/app/services/book.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-book-add',
@@ -24,7 +25,8 @@ export class BookAddComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private store: Store<fromBook.AppState>,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   public ngOnInit(): void {
@@ -51,10 +53,9 @@ export class BookAddComponent implements OnInit {
     };
 
     this.store.dispatch(new bookActions.CreateBook(newBook));
-
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'You successfully added a book!'});
     // Reset form after submit
     this.bookForm.reset();
-
     this.router.navigateByUrl('books');
   }
 
