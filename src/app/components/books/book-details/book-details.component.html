@@ -1,0 +1,9 @@
+<p>
+  ID: {{book?.id}}
+</p>
+<p>
+  TITLE: {{book?.title}}
+</p>
+<p *ngFor="let author of book?.author">
+  AUTHOR: {{author?.name}}
+</p>

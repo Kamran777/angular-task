@@ -6,10 +6,9 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-book-table',
   templateUrl: './book-table.component.html',
-  styleUrls: ['./book-table.component.scss']
+  styleUrls: ['./book-table.component.scss'],
 })
 export class BookTableComponent implements OnInit, OnDestroy {
-
   public subscription: Subscription;
   public disableRouterLink: boolean = true;
   @Input() public books: Book[];
@@ -21,6 +20,7 @@ export class BookTableComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.showLoader = true;
     if (!this.books) {
+      this.disableRouterLink = false;
       this.getAllBooks();
     }
   }
@@ -36,8 +36,12 @@ export class BookTableComponent implements OnInit, OnDestroy {
       });
   }
 
+  public disableRouter(): boolean {
+    return this.disableRouterLink ? true : false;
+  }
+
   public ngOnDestroy(): void {
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription?.unsubscribe();
     }
   }
