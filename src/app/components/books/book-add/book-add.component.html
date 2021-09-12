@@ -1,0 +1,28 @@
+<h1>Add Book</h1>
+<div class="p-grid p-fluid">
+  <form>
+    <div class="p-col-6 p-md-6">
+      <div class="p-inputgroup">
+        <input type="text" pInputText placeholder="Id">
+      </div>
+    </div>
+
+    <div class="p-col-6 p-md-6">
+      <div class="p-inputgroup">
+        <input type="text" pInputText placeholder="Title">
+      </div>
+    </div>
+
+    <div class="p-col-6 p-md-6">
+      <div class="p-inputgroup">
+        <p-dropdown [options]="authors" [style]="{'width':'100%'}" [(ngModel)]="selectedAuthor"
+          placeholder="Choose author..." name="selectedAuthor" (onChange)="getSelectedAuthor($event)">
+          <ng-template let-selectedAuthor pTemplate="selectedAuthor">
+            {{selectedAuthor}}
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <button pButton type="button" label="Create" routerLink="/table"></button>
+  </form>
+</div>

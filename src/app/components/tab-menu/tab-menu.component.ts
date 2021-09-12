@@ -18,7 +18,7 @@ export class TabMenuComponent {
     this.items = [
       { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
       { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/books'] },
-      { label: 'Form', icon: 'pi pi-fw pi-file', routerLink: ['/form'] },
+      { label: 'Form', icon: 'pi pi-fw pi-file', routerLink: ['/add'] },
     ];
 
     if (!this.activeItem && this.items && this.items.length) {

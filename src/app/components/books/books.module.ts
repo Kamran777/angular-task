@@ -1,3 +1,4 @@
+import { BookAddComponent } from './book-add/book-add.component';
 import { ButtonComponent } from './../shared-components/button/button.component';
 import { BookAuthorComponent } from './book-author/book-author.component';
 import { SharedModule } from './../../shared/shared.module';
@@ -7,21 +8,29 @@ import { BookComponent } from './book/book.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 const bookRoutes: Routes = [
   { path: '', component: BookComponent },
   { path: 'details/:id', component: BookDetailsComponent, pathMatch: 'full' },
   { path: 'author/:id', component: BookAuthorComponent, pathMatch: 'full' },
+  { path: 'add', component: BookAddComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedModule, RouterModule.forChild(bookRoutes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule.forChild(bookRoutes),
+  ],
   declarations: [
     BookComponent,
     ButtonComponent,
     BookTableComponent,
     BookDetailsComponent,
     BookAuthorComponent,
+    BookAddComponent,
   ],
   exports: [
     BookComponent,
@@ -29,6 +38,7 @@ const bookRoutes: Routes = [
     BookTableComponent,
     BookDetailsComponent,
     BookAuthorComponent,
+    BookAddComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
