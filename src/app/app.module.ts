@@ -11,6 +11,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { routerReducer, RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { CustomSerializer } from './utils/utils';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,12 +30,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     SharedModule,
     BooksModule,
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot({
+      router: routerReducer
+    }),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([]),
   ],
   exports: [ButtonComponent, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

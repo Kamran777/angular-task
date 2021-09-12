@@ -1,28 +1,32 @@
+<app-button [labelName]="'Back'" [routerLinkPath]="'/books'"></app-button>
 <h1>Add Book</h1>
 <div class="p-grid p-fluid">
-  <form>
+  <form [formGroup]="bookForm">
     <div class="p-col-6 p-md-6">
+      <label for="title">Title</label>
       <div class="p-inputgroup">
-        <input type="text" pInputText placeholder="Id">
+        <input type="text" pInputText formControlName="title" placeholder="Title">
+      </div>
+      <div *ngIf="bookForm.controls['title'].errors && bookForm.controls['title'].touched" class="error-msg">
+        <div class="validation-text" [hidden]="!bookForm.controls['title'].errors.required">Title is required.</div>
+        <div class="validation-text" [hidden]="!bookForm.controls['title'].hasError('minlength')">Title must be at least 7 characters long.</div>
       </div>
     </div>
 
     <div class="p-col-6 p-md-6">
+      <label for="author">Author</label>
       <div class="p-inputgroup">
-        <input type="text" pInputText placeholder="Title">
-      </div>
-    </div>
-
-    <div class="p-col-6 p-md-6">
-      <div class="p-inputgroup">
-        <p-dropdown [options]="authors" [style]="{'width':'100%'}" [(ngModel)]="selectedAuthor"
+        <p-dropdown formControlName="author" [options]="authors" [style]="{'width':'100%'}"
           placeholder="Choose author..." name="selectedAuthor" (onChange)="getSelectedAuthor($event)">
           <ng-template let-selectedAuthor pTemplate="selectedAuthor">
             {{selectedAuthor}}
           </ng-template>
         </p-dropdown>
       </div>
+      <div *ngIf="bookForm.controls['author'].errors && bookForm.controls['author'].touched" class="error-msg">
+        <div class="validation-text" [hidden]="!bookForm.controls['author'].errors.required">Author is required.</div>
+      </div>
     </div>
-    <button pButton type="button" label="Create" routerLink="/table"></button>
+    <button pButton type="button" [disabled]="bookForm.invalid" (click)="addBook()" label="Create" routerLink="/books"></button>
   </form>
 </div>
