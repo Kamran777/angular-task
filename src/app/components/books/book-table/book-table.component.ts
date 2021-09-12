@@ -6,7 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-book-table',
   templateUrl: './book-table.component.html',
-  styleUrls: ['./book-table.component.scss'],
+  styleUrls: ['./book-table.component.scss']
 })
 export class BookTableComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
@@ -14,6 +14,7 @@ export class BookTableComponent implements OnInit, OnDestroy {
   @Input() public books: Book[];
   @Input() public showLoader: boolean = false;
   @Input() public title: string = 'BOOK TABLE';
+  @Input() public hideActions: boolean = false;
 
   constructor(private apiService: ApiService) {}
 

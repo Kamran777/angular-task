@@ -9,10 +9,13 @@ const routes: Routes = [
   {
     path: 'books',
     loadChildren: () =>
-      import('./components/books/books.module').then((module) => module.BooksModule),
+      import('./components/books/books.module').then(
+        (module) => module.BooksModule
+      ),
     pathMatch: 'prefix',
   },
   { path: 'details', redirectTo: 'books/details/:id', pathMatch: 'full' },
+  { path: 'author', redirectTo: 'books/author/:id', pathMatch: 'full' },
 ];
 
 @NgModule({
