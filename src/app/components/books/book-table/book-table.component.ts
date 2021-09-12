@@ -1,6 +1,6 @@
 import { Book } from './../../../models/book.model';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import * as fromBook from '../state/book.reducer';
 import * as bookActions from '../state/book.actions';
@@ -52,7 +52,6 @@ export class BookTableComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are You Sure You want to Delete the Book?',
       accept: () => {
-        //Actual logic to perform a confirmation
         this.store.dispatch(new bookActions.DeleteBook(book.id as any));
         this.confirmationService.close();
         this.messageService.add({severity:'success', summary: 'Success', detail: 'You successfully deleted a book!'});

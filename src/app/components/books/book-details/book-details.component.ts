@@ -2,7 +2,6 @@ import { BookService } from './../../../services/book.service';
 import { Book } from './../../../models/book.model';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

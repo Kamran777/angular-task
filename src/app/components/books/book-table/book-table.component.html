@@ -35,34 +35,3 @@
     </ng-template>
   </p-table>
 </div>
-
-<!-- 
-<h3>Books</h3>
-<a class="btn btn-success mb-4 mt-2" routerLink="add" style="color: white !important;">Add New Book+</a>
-<table class="table table-hover">
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">Id</th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Actions</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="5" class="alert alert-danger" *ngIf="error$ | async as error">{{error}}</td>
-    </tr>
-    <tr>
-    <tr *ngFor="let book of (books$ |async)">
-      <td>{{book.id}}</td>
-      <th scope="row">{{book.title}}</th>
-      <td>{{book.author}}</td>
-      <th>
-        <a (click)=editBook(book)>edit</a>
-        <br>
-        <a (click)=deleteBook(book)>delete</a>
-      </th>
-    </tr>
-  </tbody>
-</table> -->
