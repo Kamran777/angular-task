@@ -1,4 +1,3 @@
-import { getAuthors } from './../components/books/state/author.reducer';
 import { Author } from './../models/author.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
