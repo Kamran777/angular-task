@@ -16,6 +16,7 @@ const routes: Routes = [
   },
   { path: 'details', redirectTo: 'books/details/:id', pathMatch: 'full' },
   { path: 'author', redirectTo: 'books/author/:id', pathMatch: 'full' },
+  { path: 'add', redirectTo: 'books/add', pathMatch: 'full' },
 ];
 
 @NgModule({
