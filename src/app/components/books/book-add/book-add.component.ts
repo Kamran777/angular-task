@@ -12,7 +12,6 @@ import {
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import * as fromBook from '../state/book.reducer';
-import * as fromAuthor from '../state/author.reducer';
 import * as bookActions from '../state/book.actions';
 import { Author } from './../../../models/author.model';
 
@@ -72,26 +71,27 @@ export class BookAddComponent implements OnInit {
     this.router.navigateByUrl('books');
   }
 
-  public getId(author: any): void {
+  public getId(author: string): void {
     this.bookService.getAuthors().subscribe((authors: Author[]) => {
-      authors.forEach((author: any) => {
-        if (author.name === author) {
-          this.id = author.id;
+      authors.forEach((authorValue: any) => {
+        if (authorValue.name === author) {
+          this.id = authorValue.id;
         }
       });
     });
   }
 
-  get title() {
+  private get title(): any {
     return this.bookForm.get('title') as FormControl;
   }
 
-  get author() {
+  private get author(): any {
     return this.bookForm.get('author') as FormControl;
   }
 
   public getAuthors(): void {
-    this.apiService.getAll<Book[]>(`books`).subscribe((data: any) => {
+    this.apiService.getAll<Book[]>(`books`)
+    .subscribe((data: any) => {
       const newAuthorsArr: any[] = [];
       data.map((authors: any) => {
         authors.author.map((author: any) => {

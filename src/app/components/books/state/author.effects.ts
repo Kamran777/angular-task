@@ -1,4 +1,3 @@
-import { AuthorActionTypes } from './author.actions';
 import { BookService } from './../../../services/book.service';
 import { Injectable } from '@angular/core';
 
