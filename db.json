@@ -79,6 +79,38 @@
           "name": "S. Kamran"
         }
       ]
+    },
+    {
+      "title": "Title 9",
+      "author": [
+        {
+          "id": 4,
+          "name": "L. Katarzyna"
+        }
+      ],
+      "id": 9
+    }
+  ],
+  "authors": [
+    {
+      "id": 1,
+      "name": "S. Kamran"
+    },
+    {
+      "id": 2,
+      "name": "A. Jamal"
+    },
+    {
+      "id": 3,
+      "name": "S. John"
+    },
+    {
+      "id": 4,
+      "name": "L. Katarzyna"
+    },
+    {
+      "id": 5,
+      "name": "P. Krzysztof"
     }
   ]
 }
