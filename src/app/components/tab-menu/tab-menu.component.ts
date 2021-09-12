@@ -16,11 +16,13 @@ export class TabMenuComponent {
 
   public tabMenuItemConfiguration(): void {
     this.items = [
-      { label: 'Home', icon: 'pi pi-fw pi-home' },
-      { label: 'Table', icon: 'pi pi-fw pi-table' },
-      { label: 'Form', icon: 'pi pi-fw pi-file' },
+      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/home'] },
+      { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/books'] },
+      { label: 'Form', icon: 'pi pi-fw pi-file', routerLink: ['/form'] },
     ];
 
-    this.activeItem = this.items[0];
+    if (!this.activeItem && this.items && this.items.length) {
+      this.activeItem = this.items[0];
+    }
   }
 }

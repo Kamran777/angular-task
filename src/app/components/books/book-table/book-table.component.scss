@@ -1,0 +1,11 @@
+#link {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}

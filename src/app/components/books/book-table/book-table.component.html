@@ -15,9 +15,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-book let-columns="columns">
             <tr>
-                <td id="text-link">{{ book.id }}</td>
+                <td id="link" [class.disabled]="disableRouter()"
+                [routerLink]="['details', book?.id]">{{ book.id }}</td>
                 <td>{{ book.title }}</td>
-                <td id="text-link"
+                <td id="link" [class.disabled]="disableRouter()"
                     *ngFor="let author of book.author">
                     <span>{{ author.name }}</span>
                 </td>
