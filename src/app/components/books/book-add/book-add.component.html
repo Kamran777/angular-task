@@ -2,7 +2,7 @@
 <h1>Add Book</h1>
 <div class="p-grid p-fluid">
   <form [formGroup]="bookForm">
-    <div class="p-col-6 p-md-6">
+    <div class="p-col-6 p-md-6 input-content">
       <label for="title">Title</label>
       <div class="p-inputgroup">
         <input type="text" pInputText formControlName="title" placeholder="Title">
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="p-col-6 p-md-6">
+    <div class="p-col-6 p-md-6 input-content">
       <label for="author">Author</label>
       <div class="p-inputgroup">
         <p-dropdown formControlName="author" [options]="authors" [style]="{'width':'100%'}"

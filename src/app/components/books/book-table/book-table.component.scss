@@ -1,3 +1,5 @@
+@import './../../../app.component.scss';
+
 #link {
   cursor: pointer;
   &:hover {
@@ -8,4 +10,8 @@
 .disabled {
   pointer-events: none;
   cursor: default;
+}
+
+.card{
+  margin-top: 15px;
 }
