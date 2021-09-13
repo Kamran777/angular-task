@@ -50,4 +50,4 @@ export type Actions =
   | LoadAuthorsFail
   | LoadAuthor
   | LoadAuthorSuccess
-  | LoadAuthorFail
+  | LoadAuthorFail;

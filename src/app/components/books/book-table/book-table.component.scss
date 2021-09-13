@@ -1,17 +1,11 @@
-@import './../../../app.component.scss';
+@import "./../../../app.component.scss";
 
-#link {
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.disabled {
-  pointer-events: none;
-  cursor: default;
-}
-
-.card{
+.card {
   margin-top: 15px;
+  #link {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

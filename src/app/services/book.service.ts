@@ -5,9 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book.model';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookService {
   private booksUrl = 'http://localhost:3000/books';
@@ -40,10 +39,7 @@ export class BookService {
   }
 
   updateBook(customer: Book): Observable<Book> {
-    return this.http.patch<Book>(
-      `${this.booksUrl}/${customer.id}`,
-      customer
-    );
+    return this.http.patch<Book>(`${this.booksUrl}/${customer.id}`, customer);
   }
 
   deleteBook(payload: number) {

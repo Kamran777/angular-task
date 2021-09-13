@@ -9,8 +9,25 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-    imports: [TabMenuModule, TableModule, ButtonModule, InputTextModule, DropdownModule, ProgressSpinnerModule, ConfirmDialogModule, ToastModule],
-    exports: [TabMenuModule, TableModule, ButtonModule, InputTextModule, DropdownModule, ProgressSpinnerModule, ConfirmDialogModule, ToastModule],
+  imports: [
+    TabMenuModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    DropdownModule,
+    ProgressSpinnerModule,
+    ConfirmDialogModule,
+    ToastModule,
+  ],
+  exports: [
+    TabMenuModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    DropdownModule,
+    ProgressSpinnerModule,
+    ConfirmDialogModule,
+    ToastModule,
+  ],
 })
-
 export class PrimengModule {}

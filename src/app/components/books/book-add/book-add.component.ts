@@ -53,7 +53,11 @@ export class BookAddComponent implements OnInit {
     };
 
     this.store.dispatch(new bookActions.CreateBook(newBook));
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'You successfully added a book!'});
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'You successfully added a book!',
+    });
     // Reset form after submit
     this.bookForm.reset();
     this.router.navigateByUrl('books');

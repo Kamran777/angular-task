@@ -6,11 +6,11 @@
     position: relative;
     margin-top: 10%;
     .text-content{
-        font-size: 70px;
-        font-weight: 500;
+        font-size: $home-text-font-size;
+        font-weight: $font-weight-medium;
         line-height: 1;
         text-transform: none;
-        color: #000000;
+        color: $black-color;
     }
   }
 }

@@ -1,9 +1,7 @@
 import { Author } from './../../../models/author.model';
-import * as authorActions from './author.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
+import * as authorActions from './author.actions';
 import * as fromRoot from '../../../state/app.state';
 
 export interface AuthorState extends EntityState<Author> {
@@ -17,9 +15,8 @@ export interface AppState extends fromRoot.AppState {
   authors: AuthorState;
 }
 
-export const authorAdapter: EntityAdapter<Author> = createEntityAdapter<
-  Author
->();
+export const authorAdapter: EntityAdapter<Author> =
+  createEntityAdapter<Author>();
 
 export const defaultAuthor: AuthorState = {
   ids: [],
@@ -27,7 +24,7 @@ export const defaultAuthor: AuthorState = {
   selectedAuthorId: null,
   loading: false,
   loaded: false,
-  error: ''
+  error: '',
 };
 
 export const initialState = authorAdapter.getInitialState(defaultAuthor);
@@ -41,7 +38,7 @@ export function authorReducer(
       return authorAdapter.addMany(action.payload, {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
       });
     }
     case authorActions.AuthorActionTypes.LOAD_AUTHORS_FAIL: {
@@ -50,20 +47,20 @@ export function authorReducer(
         entities: {},
         loading: false,
         loaded: false,
-        error: action.payload
+        error: action.payload,
       };
     }
 
     case authorActions.AuthorActionTypes.LOAD_AUTHOR_SUCCESS: {
       return authorAdapter.addOne(action.payload, {
         ...state,
-        selectedAuthorId: action.payload.id
+        selectedAuthorId: action.payload.id,
       });
     }
     case authorActions.AuthorActionTypes.LOAD_AUTHOR_FAIL: {
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     }
 
@@ -73,9 +70,7 @@ export function authorReducer(
   }
 }
 
-const getAuthorFeatureState = createFeatureSelector<AuthorState>(
-  'authors'
-);
+const getAuthorFeatureState = createFeatureSelector<AuthorState>('authors');
 
 export const getAuthors = createSelector(
   getAuthorFeatureState,
@@ -104,5 +99,5 @@ export const getCurrentAuthorId = createSelector(
 export const getCurrentAuthor = createSelector(
   getAuthorFeatureState,
   getCurrentAuthorId,
-  state => state.entities[state.selectedAuthorId as any]
+  (state) => state.entities[state.selectedAuthorId as any]
 );

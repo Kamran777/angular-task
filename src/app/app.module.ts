@@ -12,18 +12,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { routerReducer, RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  routerReducer,
+  RouterStateSerializer,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomSerializer } from './utils/utils';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    TabMenuComponent,
-  ],
+  declarations: [AppComponent, HomeComponent, TabMenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,7 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({
-      router: routerReducer
+      router: routerReducer,
     }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
@@ -44,6 +44,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [ButtonComponent, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

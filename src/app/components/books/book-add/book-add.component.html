@@ -9,7 +9,8 @@
       </div>
       <div *ngIf="bookForm.controls['title'].errors && bookForm.controls['title'].touched" class="error-msg">
         <div class="validation-text" [hidden]="!bookForm.controls['title'].errors.required">Title is required.</div>
-        <div class="validation-text" [hidden]="!bookForm.controls['title'].hasError('minlength')">Title must be at least 7 characters long.</div>
+        <div class="validation-text" [hidden]="!bookForm.controls['title'].hasError('minlength')">Title must be at least
+          7 characters long.</div>
       </div>
     </div>
 
@@ -27,6 +28,7 @@
         <div class="validation-text" [hidden]="!bookForm.controls['author'].errors.required">Author is required.</div>
       </div>
     </div>
-    <button pButton type="button" [disabled]="bookForm.invalid" (click)="addBook()" label="Create" routerLink="/books"></button>
+    <button pButton type="button" [disabled]="bookForm.invalid" (click)="addBook()" label="Create"
+      routerLink="/books"></button>
   </form>
 </div>
