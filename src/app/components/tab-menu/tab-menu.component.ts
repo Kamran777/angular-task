@@ -22,8 +22,6 @@ export class TabMenuComponent {
       { label: 'Form', icon: 'pi pi-fw pi-file', routerLink: ['/add'] },
     ];
 
-    // if (!this.activeItem && this.items && this.items.length) {
-      this.activeItem = this.items[0];
-    //}
+    this.activeItem = this.items[0];
   }
 }
