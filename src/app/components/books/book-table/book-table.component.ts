@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import * as fromBook from '../state/book.reducer';
 import * as bookActions from '../state/book.actions';
-import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
