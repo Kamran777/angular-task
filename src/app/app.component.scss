@@ -1,3 +1,22 @@
-*, body{
-    font-family:'Times New Roman', Times, serif;
+$validation-color: #fa4b4b;
+$black-color: #050505;
+$font-weight-bold: bold;
+$font-weight-medium: 500;
+$home-text-font-size: 70px;
+$spinner-text-font-size: 28px;
+$spinner-text-font-family: fantasy;
+
+*,
+body {
+  font-family: "Times New Roman", Times, serif;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
 }

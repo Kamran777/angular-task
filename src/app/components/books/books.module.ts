@@ -36,7 +36,7 @@ const bookRoutes: Routes = [
     RouterModule.forChild(bookRoutes),
     StoreModule.forFeature('books', bookReducer),
     StoreModule.forFeature('authors', authorReducer),
-    EffectsModule.forFeature([BookEffect, AuthorEffect])
+    EffectsModule.forFeature([BookEffect, AuthorEffect]),
   ],
   declarations: [
     BookComponent,
@@ -47,7 +47,7 @@ const bookRoutes: Routes = [
     BookAddComponent,
     SpinnerComponent,
     ConfirmationDialogComponent,
-    ToastComponent
+    ToastComponent,
   ],
   exports: [
     BookComponent,

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import * as fromBook from '../state/book.reducer';
 import * as bookActions from '../state/book.actions';
-import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -14,6 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class BookTableComponent implements OnInit {
   public error$: Observable<String>;
+
   @Input() public books$: Observable<Book[]>;
   @Input() public showLoader: boolean = false;
   @Input() public disableRouterLink: boolean = true;
@@ -22,14 +22,13 @@ export class BookTableComponent implements OnInit {
 
   constructor(
     private store: Store<fromBook.AppState>,
-    private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
 
   public ngOnInit(): void {
     this.showLoader = true;
-    if(!this.books$){
+    if (!this.books$) {
       this.getAllBooks();
     }
     this.error$ = this.store.pipe(select(fromBook.getError));
@@ -54,12 +53,20 @@ export class BookTableComponent implements OnInit {
       accept: () => {
         this.store.dispatch(new bookActions.DeleteBook(book.id as any));
         this.confirmationService.close();
-        this.messageService.add({severity:'success', summary: 'Success', detail: 'You successfully deleted a book!'});
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'You successfully deleted a book!',
+        });
       },
       reject: () => {
         this.confirmationService.close();
-        this.messageService.add({severity:'info', summary: 'Info', detail: 'You declined delete book operation!'});
-      }
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Info',
+          detail: 'You declined delete book operation!',
+        });
+      },
     });
   }
 }

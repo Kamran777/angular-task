@@ -1,14 +1,13 @@
-@import './../../../app.component.scss';
+@import "./../../../app.component.scss";
 
-.details-content{
-    text-align: center;
-    h1{
-        font-size: 40px;
-    }
-    .label-text{
-        font-weight: bold;
-    }
-    .data-content{
-        font-size: 27px;
-    }
+$label-text-font-size: 27px;
+
+.details-content {
+  text-align: center;
+  .label-text {
+    font-weight: $font-weight-bold;
+  }
+  .data-content {
+    font-size: $label-text-font-size;
+  }
 }

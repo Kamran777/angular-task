@@ -12,10 +12,7 @@ import { Author } from 'src/app/models/author.model';
 
 @Injectable()
 export class AuthorEffect {
-  constructor(
-    private actions$: Actions,
-    private bookService: BookService
-  ) {}
+  constructor(private actions$: Actions, private bookService: BookService) {}
 
   @Effect()
   loadAuthors$: Observable<Action> = this.actions$.pipe(
@@ -25,10 +22,9 @@ export class AuthorEffect {
     mergeMap((action: authorActions.LoadAuthors) =>
       this.bookService.getAuthors().pipe(
         map(
-          (authors: Author[]) =>
-            new authorActions.LoadAuthorsSuccess(authors)
+          (authors: Author[]) => new authorActions.LoadAuthorsSuccess(authors)
         ),
-        catchError(err => of(new authorActions.LoadAuthorsFail(err)))
+        catchError((err) => of(new authorActions.LoadAuthorsFail(err)))
       )
     )
   );
@@ -40,11 +36,8 @@ export class AuthorEffect {
     ),
     mergeMap((action: authorActions.LoadAuthor) =>
       this.bookService.getAuthorById(action.payload).pipe(
-        map(
-          (author: Author) =>
-            new authorActions.LoadAuthorSuccess(author)
-        ),
-        catchError(err => of(new authorActions.LoadAuthorFail(err)))
+        map((author: Author) => new authorActions.LoadAuthorSuccess(author)),
+        catchError((err) => of(new authorActions.LoadAuthorFail(err)))
       )
     )
   );

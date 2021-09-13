@@ -1,9 +1,7 @@
 import { Book } from './../../../models/book.model';
-import * as bookActions from './book.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
+import * as bookActions from './book.actions';
 import * as fromRoot from '../../../state/app.state';
 
 export interface BookState extends EntityState<Book> {
@@ -17,9 +15,7 @@ export interface AppState extends fromRoot.AppState {
   books: BookState;
 }
 
-export const bookAdapter: EntityAdapter<Book> = createEntityAdapter<
-  Book
->();
+export const bookAdapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 
 export const defaultBook: BookState = {
   ids: [],
@@ -27,7 +23,7 @@ export const defaultBook: BookState = {
   selectedBookId: null,
   loading: false,
   loaded: false,
-  error: ''
+  error: '',
 };
 
 export const initialState = bookAdapter.getInitialState(defaultBook);
@@ -41,7 +37,7 @@ export function bookReducer(
       return bookAdapter.addMany(action.payload, {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
       });
     }
     case bookActions.BookActionTypes.LOAD_BOOKS_FAIL: {
@@ -50,20 +46,20 @@ export function bookReducer(
         entities: {},
         loading: false,
         loaded: false,
-        error: action.payload
+        error: action.payload,
       };
     }
 
     case bookActions.BookActionTypes.LOAD_BOOK_SUCCESS: {
       return bookAdapter.addOne(action.payload, {
         ...state,
-        selectedBookId: action.payload.id
+        selectedBookId: action.payload.id,
       });
     }
     case bookActions.BookActionTypes.LOAD_BOOK_FAIL: {
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     }
 
@@ -73,17 +69,7 @@ export function bookReducer(
     case bookActions.BookActionTypes.CREATE_BOOK_FAIL: {
       return {
         ...state,
-        error: action.payload
-      };
-    }
-
-    case bookActions.BookActionTypes.UPDATE_BOOK_SUCCESS: {
-      return bookAdapter.updateOne(action.payload, state);
-    }
-    case bookActions.BookActionTypes.UPDATE_BOOK_FAIL: {
-      return {
-        ...state,
-        error: action.payload
+        error: action.payload,
       };
     }
 
@@ -93,7 +79,7 @@ export function bookReducer(
     case bookActions.BookActionTypes.DELETE_BOOK_FAIL: {
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     }
 
@@ -103,9 +89,7 @@ export function bookReducer(
   }
 }
 
-const getBookFeatureState = createFeatureSelector<BookState>(
-  'books'
-);
+const getBookFeatureState = createFeatureSelector<BookState>('books');
 
 export const getBooks = createSelector(
   getBookFeatureState,
@@ -134,5 +118,5 @@ export const getCurrentBookId = createSelector(
 export const getCurrentBook = createSelector(
   getBookFeatureState,
   getCurrentBookId,
-  state => state.entities[state.selectedBookId as any]
+  (state) => state.entities[state.selectedBookId as any]
 );
