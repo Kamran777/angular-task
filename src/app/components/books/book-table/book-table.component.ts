@@ -58,13 +58,8 @@ export class BookTableComponent implements OnInit {
       },
       reject: () => {
         this.confirmationService.close();
-        this.messageService.add({severity:'info', summary: 'Info', detail: 'You declined delete a book!'});
+        this.messageService.add({severity:'info', summary: 'Info', detail: 'You declined delete book operation!'});
       }
     });
-  }
-
-  public editBook(book: Book): void {
-    this.router.navigateByUrl('edit');
-    this.store.dispatch(new bookActions.LoadBook(book.id as any));
   }
 }

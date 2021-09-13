@@ -1,0 +1,14 @@
+@import './../../../app.component.scss';
+
+.details-content{
+    text-align: center;
+    h1{
+        font-size: 40px;
+    }
+    .label-text{
+        font-weight: bold;
+    }
+    .data-content{
+        font-size: 27px;
+    }
+}

@@ -9,6 +9,7 @@ import { MenuItem } from 'primeng/api';
 export class TabMenuComponent {
   public items: MenuItem[];
   public activeItem: MenuItem;
+  public active: boolean = false;
 
   public ngOnInit(): void {
     this.tabMenuItemConfiguration();
@@ -21,8 +22,6 @@ export class TabMenuComponent {
       { label: 'Form', icon: 'pi pi-fw pi-file', routerLink: ['/add'] },
     ];
 
-    if (!this.activeItem && this.items && this.items.length) {
-      this.activeItem = this.items[0];
-    }
+    this.activeItem = this.items[0];
   }
 }

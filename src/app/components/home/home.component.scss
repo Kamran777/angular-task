@@ -1,0 +1,16 @@
+@import './../../app.component.scss';
+
+#home-container {
+  .content {
+    text-align: center;
+    position: relative;
+    margin-top: 10%;
+    .text-content{
+        font-size: 70px;
+        font-weight: 500;
+        line-height: 1;
+        text-transform: none;
+        color: #000000;
+    }
+  }
+}

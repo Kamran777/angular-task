@@ -27,7 +27,6 @@
           <span [routerLink]="['author', author?.id]">{{ author.name }}</span>
         </td>
         <td *ngIf="!hideActions">
-          <button pButton type="button" label="Edit" class="p-button-success"></button>
           <button pButton type="button" label="Delete" (click)=deleteBook(book) class="p-button-danger"></button>
           <app-confirmation-dialog></app-confirmation-dialog>
         </td>
